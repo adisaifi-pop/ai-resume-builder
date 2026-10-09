@@ -8,13 +8,9 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Segoe UI', sans-serif; background: #0f0f0f; color: #fff; }
-
-  /* NAV */
   nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; background: #0f0f0f; border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 100; }
   .logo { font-size: 22px; font-weight: 700; color: #7c3aed; }
   .nav-btn { background: #7c3aed; color: #fff; border: none; padding: 10px 24px; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: 600; }
-
-  /* HERO */
   .hero { text-align: center; padding: 80px 20px 60px; }
   .hero h1 { font-size: 52px; font-weight: 800; line-height: 1.2; margin-bottom: 20px; }
   .hero h1 span { color: #7c3aed; }
@@ -22,15 +18,20 @@
   .hero-btn { background: #7c3aed; color: #fff; border: none; padding: 16px 40px; border-radius: 12px; font-size: 18px; font-weight: 700; cursor: pointer; transition: 0.2s; }
   .hero-btn:hover { background: #6d28d9; transform: translateY(-2px); }
   .badge { display: inline-block; background: #1a1a2e; color: #7c3aed; border: 1px solid #7c3aed; padding: 6px 16px; border-radius: 20px; font-size: 14px; margin-bottom: 20px; }
-
-  /* FEATURES */
   .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 900px; margin: 60px auto; padding: 0 20px; }
   .feature { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 16px; padding: 28px; text-align: center; }
   .feature-icon { font-size: 36px; margin-bottom: 16px; }
   .feature h3 { font-size: 18px; margin-bottom: 8px; }
   .feature p { color: #aaa; font-size: 14px; }
-
-  /* FORM SECTION */
+  .api-section { max-width: 500px; margin: 0 auto; padding: 40px 20px; display: none; }
+  .api-section.active { display: block; }
+  .api-section h2 { font-size: 28px; font-weight: 700; margin-bottom: 8px; text-align: center; }
+  .api-section p { color: #aaa; text-align: center; margin-bottom: 24px; font-size: 14px; }
+  .api-input { width: 100%; background: #1a1a1a; border: 1px solid #2a2a2a; color: #fff; padding: 14px 16px; border-radius: 10px; font-size: 15px; outline: none; margin-bottom: 16px; }
+  .api-input:focus { border-color: #7c3aed; }
+  .api-btn { width: 100%; background: #7c3aed; color: #fff; border: none; padding: 14px; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; }
+  .api-note { background: #1a1a2e; border: 1px solid #7c3aed33; border-radius: 10px; padding: 16px; margin-bottom: 20px; font-size: 13px; color: #aaa; line-height: 1.6; }
+  .api-note a { color: #7c3aed; }
   .form-section { max-width: 800px; margin: 0 auto; padding: 40px 20px; display: none; }
   .form-section.active { display: block; }
   .form-section h2 { font-size: 32px; font-weight: 700; margin-bottom: 8px; text-align: center; }
@@ -39,20 +40,15 @@
   .form-group { display: flex; flex-direction: column; gap: 8px; }
   .form-group.full { grid-column: 1 / -1; }
   label { font-size: 14px; color: #aaa; font-weight: 500; }
-  input, textarea, select { background: #1a1a1a; border: 1px solid #2a2a2a; color: #fff; padding: 12px 16px; border-radius: 10px; font-size: 15px; outline: none; transition: 0.2s; font-family: inherit; }
-  input:focus, textarea:focus, select:focus { border-color: #7c3aed; }
+  input, textarea { background: #1a1a1a; border: 1px solid #2a2a2a; color: #fff; padding: 12px 16px; border-radius: 10px; font-size: 15px; outline: none; transition: 0.2s; font-family: inherit; }
+  input:focus, textarea:focus { border-color: #7c3aed; }
   textarea { resize: vertical; min-height: 100px; }
   .generate-btn { width: 100%; background: #7c3aed; color: #fff; border: none; padding: 16px; border-radius: 12px; font-size: 18px; font-weight: 700; cursor: pointer; margin-top: 24px; transition: 0.2s; }
   .generate-btn:hover { background: #6d28d9; }
-  .generate-btn:disabled { background: #444; cursor: not-allowed; }
-
-  /* LOADING */
   .loading { text-align: center; padding: 40px; display: none; }
   .loading.active { display: block; }
   .spinner { width: 50px; height: 50px; border: 4px solid #2a2a2a; border-top: 4px solid #7c3aed; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px; }
   @keyframes spin { to { transform: rotate(360deg); } }
-
-  /* RESUME OUTPUT */
   .resume-section { max-width: 800px; margin: 0 auto; padding: 40px 20px; display: none; }
   .resume-section.active { display: block; }
   .resume-actions { display: flex; gap: 16px; margin-bottom: 24px; justify-content: center; }
@@ -61,8 +57,6 @@
   .download-btn:hover { background: #6d28d9; }
   .new-btn { background: #1a1a1a; color: #fff; border: 1px solid #2a2a2a; }
   .new-btn:hover { background: #2a2a2a; }
-
-  /* RESUME PREVIEW */
   #resume-preview { background: #fff; color: #000; padding: 48px; border-radius: 12px; font-family: 'Georgia', serif; line-height: 1.6; }
   #resume-preview h1 { font-size: 28px; color: #1a1a1a; margin-bottom: 4px; }
   #resume-preview .contact-info { color: #555; font-size: 14px; margin-bottom: 24px; border-bottom: 2px solid #7c3aed; padding-bottom: 16px; }
@@ -73,10 +67,7 @@
   #resume-preview .job { margin-bottom: 16px; }
   #resume-preview .job-title { font-weight: 700; font-size: 15px; }
   #resume-preview .job-company { color: #555; font-size: 14px; }
-
-  /* FOOTER */
   footer { text-align: center; padding: 40px; color: #555; border-top: 1px solid #222; margin-top: 80px; }
-
   @media (max-width: 600px) {
     .hero h1 { font-size: 32px; }
     .features { grid-template-columns: 1fr; }
@@ -92,7 +83,6 @@
   <button class="nav-btn" onclick="showForm()">Build My Resume</button>
 </nav>
 
-<!-- HERO -->
 <section class="hero" id="hero">
   <div class="badge">✨ Powered by AI</div>
   <h1>Build a Professional Resume<br><span>in 30 Seconds</span></h1>
@@ -100,7 +90,6 @@
   <button class="hero-btn" onclick="showForm()">🚀 Build My Resume Free</button>
 </section>
 
-<!-- FEATURES -->
 <div class="features" id="features">
   <div class="feature">
     <div class="feature-icon">⚡</div>
@@ -119,11 +108,20 @@
   </div>
 </div>
 
-<!-- FORM -->
+<!-- API KEY SECTION -->
+<section class="api-section" id="api-section">
+  <h2>🔑 Enter Your API Key</h2>
+  <p>Required once to power the AI resume generation</p>
+  <div class="api-note">
+    Get your <b>free</b> API key from <a href="https://console.groq.com" target="_blank">console.groq.com</a> — it's completely free, no credit card needed! Create account → API Keys → Create Key
+  </div>
+  <input class="api-input" type="password" id="api-key-input" placeholder="gsk_..." />
+  <button class="api-btn" onclick="saveApiKey()">Continue →</button>
+</section>
+
 <section class="form-section" id="form-section">
   <h2>Tell us about yourself</h2>
   <p>Fill in your details and AI will write your perfect resume</p>
-  
   <div class="form-grid">
     <div class="form-group">
       <label>Full Name *</label>
@@ -163,23 +161,18 @@
     </div>
     <div class="form-group full">
       <label>Achievements / Projects (optional)</label>
-      <textarea id="achievements" placeholder="Example: Built an app with 1000+ users. Won hackathon. Published research paper."></textarea>
+      <textarea id="achievements" placeholder="Example: Built an app with 1000+ users. Won hackathon."></textarea>
     </div>
   </div>
-  
-  <button class="generate-btn" id="generate-btn" onclick="generateResume()">
-    ✨ Generate My Resume with AI
-  </button>
+  <button class="generate-btn" onclick="generateResume()">✨ Generate My Resume with AI</button>
 </section>
 
-<!-- LOADING -->
 <div class="loading" id="loading">
   <div class="spinner"></div>
   <h3>AI is writing your resume...</h3>
   <p style="color:#aaa; margin-top:8px">This takes about 15-20 seconds</p>
 </div>
 
-<!-- RESUME OUTPUT -->
 <section class="resume-section" id="resume-section">
   <div class="resume-actions">
     <button class="action-btn download-btn" onclick="downloadPDF()">📄 Download PDF</button>
@@ -194,11 +187,29 @@
 </footer>
 
 <script>
+let groqApiKey = localStorage.getItem('groq_api_key') || '';
+
 function showForm() {
   document.getElementById('hero').style.display = 'none';
   document.getElementById('features').style.display = 'none';
-  document.getElementById('form-section').classList.add('active');
+  if (!groqApiKey) {
+    document.getElementById('api-section').classList.add('active');
+  } else {
+    document.getElementById('form-section').classList.add('active');
+  }
   window.scrollTo(0, 0);
+}
+
+function saveApiKey() {
+  const key = document.getElementById('api-key-input').value.trim();
+  if (!key || !key.startsWith('gsk_')) {
+    alert('Please enter a valid Groq API key starting with gsk_');
+    return;
+  }
+  groqApiKey = key;
+  localStorage.setItem('groq_api_key', key);
+  document.getElementById('api-section').classList.remove('active');
+  document.getElementById('form-section').classList.add('active');
 }
 
 function buildNew() {
@@ -227,50 +238,60 @@ async function generateResume() {
   document.getElementById('form-section').classList.remove('active');
   document.getElementById('loading').classList.add('active');
 
-  const prompt = `You are a professional resume writer. Create a clean, ATS-friendly resume in HTML format for this person:
+  const prompt = `You are a professional resume writer. Create a clean ATS-friendly resume in HTML for:
 
 Name: ${name}
 Job Title: ${jobtitle}
 Email: ${email}
 Phone: ${phone}
 Location: ${location}
-LinkedIn/Portfolio: ${linkedin}
+LinkedIn: ${linkedin}
 Experience: ${experience}
 Education: ${education}
 Skills: ${skills}
-Achievements/Projects: ${achievements}
+Achievements: ${achievements}
 
-Write a professional resume in HTML. Use this exact structure:
-- A header with name and contact info in a div with class "contact-info"
-- Sections with h2 tags for: Professional Summary, Work Experience, Education, Skills, ${achievements ? 'Achievements & Projects' : ''}
-- For experience, use divs with class "job", span with class "job-title" and "job-company"
-- Write professional bullet points expanding on what they told you
-- Make it sound impressive and professional
-- Only return the inner HTML content (no html/body tags, no styles)`;
+Return ONLY HTML content (no html/body/style tags). Use:
+- h1 for name
+- div class="contact-info" for contact details
+- h2 for section headings: Professional Summary, Work Experience, Education, Skills${achievements ? ', Achievements' : ''}
+- div class="job" with span class="job-title" and "job-company" for experience
+- ul/li for bullet points
+Make it professional and impressive.`;
 
   try {
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${groqApiKey}`
+      },
       body: JSON.stringify({
-        model: "claude-sonnet-4-6",
-        max_tokens: 1000,
-        messages: [{ role: "user", content: prompt }]
+        model: "llama-3.3-70b-versatile",
+        messages: [{ role: "user", content: prompt }],
+        max_tokens: 2000,
+        temperature: 0.7
       })
     });
 
     const data = await response.json();
-    const resumeHTML = data.content[0].text;
+    
+    if (data.error) {
+      throw new Error(data.error.message);
+    }
+
+    const resumeHTML = data.choices[0].message.content;
+    const cleanHTML = resumeHTML.replace(/```html|```/g, '').trim();
 
     document.getElementById('loading').classList.remove('active');
-    document.getElementById('resume-preview').innerHTML = resumeHTML;
+    document.getElementById('resume-preview').innerHTML = cleanHTML;
     document.getElementById('resume-section').classList.add('active');
     window.scrollTo(0, 0);
 
   } catch (error) {
     document.getElementById('loading').classList.remove('active');
     document.getElementById('form-section').classList.add('active');
-    alert('Something went wrong. Please try again.');
+    alert('Error: ' + error.message + '\n\nPlease check your API key and try again.');
   }
 }
 
